@@ -152,8 +152,8 @@
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Allocator.h" />
     <ClInclude Include="..\src\App.h" />
+    <ClInclude Include="..\src\core\Allocator.h" />
     <ClInclude Include="..\src\core\CoreTypes.h" />
     <ClInclude Include="..\src\gl_headers.h" />
     <ClInclude Include="..\src\graphics\Cubes.h" />

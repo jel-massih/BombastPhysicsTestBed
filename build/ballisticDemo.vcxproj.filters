@@ -47,14 +47,14 @@
     <ClInclude Include="..\src\core\CoreTypes.h">
       <Filter>Common Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Allocator.h">
-      <Filter>Common Files\core</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\graphics\ShaderManager.h">
       <Filter>Common Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\src\graphics\Cubes.h">
       <Filter>Common Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\core\Allocator.h">
+      <Filter>Common Files\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
