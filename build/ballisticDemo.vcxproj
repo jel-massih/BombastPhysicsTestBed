@@ -147,14 +147,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\App.cpp" />
+    <ClCompile Include="..\src\Core.cpp" />
     <ClCompile Include="..\src\demos\ballistic\ballistic.cpp" />
     <ClCompile Include="..\src\graphics\Cubes.cpp" />
+    <ClCompile Include="..\src\graphics\ShaderManager.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\App.h" />
-    <ClInclude Include="..\src\core\Allocator.h" />
-    <ClInclude Include="..\src\core\CoreTypes.h" />
+    <ClInclude Include="..\src\Core.h" />
     <ClInclude Include="..\src\gl_headers.h" />
     <ClInclude Include="..\src\graphics\Cubes.h" />
     <ClInclude Include="..\src\graphics\ShaderManager.h" />
