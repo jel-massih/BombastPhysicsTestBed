@@ -16,6 +16,12 @@
     <Filter Include="Common Files">
       <UniqueIdentifier>{dd26ec97-99a7-4d26-80fb-978fd061ce94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common Files\core">
+      <UniqueIdentifier>{8b0b253c-0e92-4733-8d69-45bc0db40f19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Files\graphics">
+      <UniqueIdentifier>{23c966ac-3f5a-4207-a5b6-fdb5cdf9b818}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -24,11 +30,11 @@
     <ClCompile Include="..\src\App.cpp">
       <Filter>Common Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ballistic\ballistic.cpp">
+    <ClCompile Include="..\src\demos\ballistic\ballistic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Cubes.cpp">
-      <Filter>Common Files</Filter>
+    <ClCompile Include="..\src\graphics\Cubes.cpp">
+      <Filter>Common Files\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -38,8 +44,17 @@
     <ClInclude Include="..\src\gl_headers.h">
       <Filter>Common Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Cubes.h">
-      <Filter>Common Files</Filter>
+    <ClInclude Include="..\src\core\CoreTypes.h">
+      <Filter>Common Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Allocator.h">
+      <Filter>Common Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphics\ShaderManager.h">
+      <Filter>Common Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\graphics\Cubes.h">
+      <Filter>Common Files\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

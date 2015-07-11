@@ -1,6 +1,6 @@
-#include "../gl_headers.h"
-#include "../App.h"
-#include "../Cubes.h"
+#include "gl_headers.h"
+#include "App.h"
+#include "graphics/Cubes.h"
 
 class BallisticDemo : public App
 {

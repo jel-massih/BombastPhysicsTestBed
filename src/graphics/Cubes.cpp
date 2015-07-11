@@ -37,3 +37,8 @@ CubesRender::~CubesRender()
 	m_maskVao = 0;
 	m_maskVbo = 0;
 }
+
+void CubesRender::Initialize()
+{
+
+}
