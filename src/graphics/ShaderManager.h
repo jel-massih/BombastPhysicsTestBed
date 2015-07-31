@@ -2,7 +2,7 @@
 #define SHADER_MANAGER_H
 
 #include <stdint.h>
-#include <hash_map>
+#include <unordered_map>
 
 class ShaderManager
 {
@@ -18,7 +18,7 @@ private:
 	void Load();
 	void Unload();
 
-	std::hash_map<uint32_t, uint32_t> m_shaders;
+	std::unordered_map<uint32_t, uint32_t> m_shaders;
 };
 
 #endif

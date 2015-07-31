@@ -3,6 +3,6 @@
 
 #define GLFW_INCLUDE_GLU
 #include <gl\glew.h>
-#include <glfw3.h>
+#include <gl\glfw3.h>
 
 #endif

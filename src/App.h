@@ -19,6 +19,8 @@ public:
 	virtual void MouseClick(int button, int action, int mods);
 	virtual void MouseDrag(int x, int y);
 
+	void RenderText(float x, float y, const char* text);
+
 	virtual void WindowResized(int width, int height);
 
 protected:

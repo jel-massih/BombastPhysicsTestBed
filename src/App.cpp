@@ -1,6 +1,8 @@
 #include "App.h"
 
+#include <cstring>
 #include "gl_headers.h"
+#include <gl\glut.h>
 
 void App::Initialize()
 {
@@ -70,4 +72,37 @@ void App::MouseClick(int button, int action, int mods)
 
 void App::MouseDrag(int x, int y)
 {
+}
+
+void App::RenderText(float x, float y, const char* text)
+{
+	glDisable(GL_DEPTH_TEST);
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0.0, (double)m_width, 0.0, (double)m_height, -1.0, 1.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	size_t textLength = strlen(text);
+
+	glRasterPos2f(x, y);
+	for (const char* letter = text; letter < text + textLength; letter++)
+	{
+		if (*letter == '\n') {
+			y -= 12.0f;
+			glRasterPos2f(x, y);
+		}
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, *letter);
+	}
+
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+
+	glEnable(GL_DEPTH_TEST);
 }
