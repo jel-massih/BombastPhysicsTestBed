@@ -85,7 +85,7 @@ int main(int argc, char** argv)
 	int windowWidth, windowHeight;
 	glfwGetWindowSize(window, &windowWidth, &windowHeight);
 
-	glfwSetWindowPos(window, desktopWidth / 2 - windowWidth / 2, desktopHeight / 2 - windowHeight / 2);
+	glfwSetWindowPos(window, desktopWidth / 2 - windowWidth / 2 + 1000, desktopHeight / 2 - windowHeight / 2);
 	
 	int displayWidth, displayHeight;
 	glfwGetFramebufferSize(window, &displayWidth, &displayHeight);
