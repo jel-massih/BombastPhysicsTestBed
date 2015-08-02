@@ -1,6 +1,8 @@
 #ifndef APP_H
 #define APP_H
 
+#include "Timer.h"
+
 class App
 {
 public:
@@ -24,7 +26,9 @@ public:
 	virtual void WindowResized(int width, int height);
 
 protected:
-	int m_width, m_height;
+	int m_width, m_height; 
+
+	Timer* m_pTimer;
 };
 
 #endif

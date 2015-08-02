@@ -39,6 +39,9 @@
     <ClCompile Include="..\src\Core.cpp">
       <Filter>Common Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Timer.cpp">
+      <Filter>Common Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\App.h">
@@ -54,6 +57,9 @@
       <Filter>Common Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Core.h">
+      <Filter>Common Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Timer.h">
       <Filter>Common Files</Filter>
     </ClInclude>
   </ItemGroup>

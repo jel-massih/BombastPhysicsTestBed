@@ -3,9 +3,17 @@
 #include <cstring>
 #include "gl_headers.h"
 #include <gl\glut.h>
+#include <cassert>
+#include <cstdarg>
+#include <stdio.h>
 
 void App::Initialize()
 {
+	m_pTimer = new Timer();
+	if (m_pTimer) {
+		m_pTimer->Initialize();
+	}
+
 	glClearColor(0.9f, 0.95f, 1.0f, 1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_SMOOTH);
@@ -16,6 +24,8 @@ void App::Initialize()
 
 void App::Shutdown()
 {
+	if (m_pTimer) { delete m_pTimer; };
+	m_pTimer = 0;
 }
 
 void App::Render()
@@ -30,6 +40,7 @@ void App::Render()
 
 void App::Update()
 {
+	m_pTimer->Frame();
 }
 
 void App::WindowResized(int width, int height)
