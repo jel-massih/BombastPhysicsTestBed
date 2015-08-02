@@ -97,26 +97,26 @@ void BallisticDemo::Fire()
 	case PT_PISTOL:
 		projectile->particle.SetMass(2.0f);
 		projectile->particle.SetVelocity(0.0f, 0.0f, 35.0f);
-		projectile->particle.SetAcceleration(0.0f, -1.0f, 0.0f);
-		projectile->particle.SetDamping(0.99f);
+		projectile->particle.SetGravity(0.0f, -1.0f, 0.0f);
+		projectile->particle.SetDamping(0.001f);
 		break;
 	case PT_ARTILLERY:
-		projectile->particle.SetMass(200.0f);
+		projectile->particle.SetMass(2.0f);
 		projectile->particle.SetVelocity(0.0f, 30.0f, 40.0f);
-		projectile->particle.SetAcceleration(0.0f, -20.0f, 0.0f);
-		projectile->particle.SetDamping(0.99f);
+		projectile->particle.SetGravity(0.0f, -20.0f, 0.0f);
+		projectile->particle.SetDamping(0.001f);
 		break;
 	case PT_LASER:
 		projectile->particle.SetMass(0.1f);
-		projectile->particle.SetVelocity(0.0f, 0.0f, 100.0f);
-		projectile->particle.SetAcceleration(0.0f, 0.0f, 0.0f);
-		projectile->particle.SetDamping(0.99f);
+		projectile->particle.SetVelocity(0.0f, 0.0f, 10.0f);
+		projectile->particle.SetGravity(0.0f, 0.0f, 0.0f);
+		projectile->particle.SetDamping(0.001f);
 		break;
 	case PT_FIREBALL:
 		projectile->particle.SetMass(1.0f);
 		projectile->particle.SetVelocity(0.0f, 0.0f, 10.0f);
-		projectile->particle.SetAcceleration(0.0f, 0.6f, 0.0f);
-		projectile->particle.SetDamping(0.9f);
+		projectile->particle.SetGravity(0.0f, 0.6f, 0.0f);
+		projectile->particle.SetDamping(0.001f);
 		break;
 	}
 
