@@ -62,5 +62,17 @@
     <ClInclude Include="..\..\src\graphics\ShaderManager.h">
       <Filter>Common Files\graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\demos\collision\Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\demos\collision\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\demos\collision\Client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\demos\collision\View.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

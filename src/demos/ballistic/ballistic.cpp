@@ -138,7 +138,7 @@ void BallisticDemo::Update()
 	{
 		if (projectile->type != PT_INVALID)
 		{
-			projectile->particle.Simulate(m_pTimer->GetTime() * 0.001f, duration);
+			projectile->particle.Simulate(duration);
 
 			if (projectile->particle.GetPosition().y < 0.0f || projectile->startTime+5000 < m_pTimer->GetTime() || projectile->particle.GetPosition().z > 200.0f)
 			{

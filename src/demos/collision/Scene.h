@@ -5,6 +5,8 @@
 #include <gl/glew.h>
 #include "vectorial/mat4f.h"
 
+void CalculateFrustumPlanes(bPhysics::BpPlane& left, bPhysics::BpPlane& right, bPhysics::BpPlane& bottom, bPhysics::BpPlane& top, bPhysics::BpPlane& front, bPhysics::BpPlane& back);
+
 struct Scene
 {
 	Scene()
@@ -36,9 +38,10 @@ struct Scene
 		planes.push_back(floor);
 	}
 
-	void Update(unsigned int t)
+	void Update(float dt)
 	{
-		cube.particle.Simulate(t);
+		cube.particle.Simulate(dt);
+		time++;
 	}
 
 public:
