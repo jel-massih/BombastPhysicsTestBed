@@ -12,6 +12,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ballisticDemo", "ballisticD
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollisionDemo", "CollisionDemo\CollisionDemo.vcxproj", "{1BB98953-F47F-435E-B040-AFEC779DC354}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BridgeDemo", "BridgeDemo\BridgeDemo.vcxproj", "{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -43,6 +45,14 @@ Global
 		{1BB98953-F47F-435E-B040-AFEC779DC354}.Release|Win32.Build.0 = Release|Win32
 		{1BB98953-F47F-435E-B040-AFEC779DC354}.Release|x64.ActiveCfg = Release|x64
 		{1BB98953-F47F-435E-B040-AFEC779DC354}.Release|x64.Build.0 = Release|x64
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Debug|Win32.Build.0 = Debug|Win32
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Debug|x64.ActiveCfg = Debug|x64
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Debug|x64.Build.0 = Debug|x64
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Release|Win32.ActiveCfg = Release|Win32
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Release|Win32.Build.0 = Release|Win32
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Release|x64.ActiveCfg = Release|x64
+		{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
