@@ -2,6 +2,7 @@
 #define APP_H
 
 #include "Timer.h"
+#include <BpPhysicsApi.h>
 
 class App
 {
@@ -29,6 +30,23 @@ protected:
 	int m_width, m_height; 
 
 	Timer* m_pTimer;
+};
+
+class MassAggregateApp : public App
+{
+public:
+	MassAggregateApp(unsigned int particleCount);
+	virtual ~MassAggregateApp();
+
+	//Update Particle Positions
+	virtual void Update();
+	virtual void Initialize();
+	virtual void Render();
+
+private:
+	bPhysics::BpScene m_scene;
+	bPhysics::BpParticle* m_particles;
+	bPhysics::BpGroundContacts groundContactGenerator
 };
 
 #endif

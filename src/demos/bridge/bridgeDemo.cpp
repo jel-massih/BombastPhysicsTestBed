@@ -4,7 +4,6 @@
 
 class BridgeDemo : public App
 {
-
 public:
 	BridgeDemo();
 
