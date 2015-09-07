@@ -10,7 +10,7 @@ struct Cube
 	{
 		particle.SetPosition(0, 5, 0);
 		particle.SetMass(1);
-		particle.SetGravity(0, -9, 0);
+		particle.SetAcceleration(0, -9, 0);
 	}
 
 	void Render(const vectorial::vec3f& light, float alpha = 1.0f)

@@ -43,10 +43,10 @@ public:
 	virtual void Initialize();
 	virtual void Render();
 
-private:
-	bPhysics::BpScene m_scene;
+protected:
+	bPhysics::BpParticleWorld m_world;
 	bPhysics::BpParticle* m_particles;
-	bPhysics::BpGroundContacts groundContactGenerator
+	bPhysics::BpParticleGroundContacts m_groundContactGenerator;
 };
 
 #endif

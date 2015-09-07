@@ -117,3 +117,60 @@ void App::RenderText(float x, float y, const char* text)
 
 	glEnable(GL_DEPTH_TEST);
 }
+
+MassAggregateApp::MassAggregateApp(unsigned int particleCount)
+	: m_world(particleCount * 10)
+{
+	m_particles = BP_NEW bPhysics::BpParticle[particleCount];
+	for (unsigned i = 0; i < particleCount; i++)
+	{
+		m_world.GetParticles().push_back(m_particles + i);
+	}
+	
+	m_groundContactGenerator.Init(&m_world.GetParticles());
+	m_world.GetContactGenerators().push_back(&m_groundContactGenerator);
+}
+
+MassAggregateApp::~MassAggregateApp()
+{
+	delete[] m_particles;
+}
+
+void MassAggregateApp::Render()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glLoadIdentity();
+	gluLookAt(0.0, 3.5, 8.0, 
+			  0.0, 3.5, 0.0,
+			  0.0, 1.0, 0.0);
+
+	glColor3f(0, 0, 0);
+
+	bPhysics::BpParticleWorld::Particles& particles = m_world.GetParticles();
+	for (auto it = particles.begin(); it != particles.end(); it++)
+	{
+		const bPhysics::BpVec3& pos = (*it)->GetPosition();
+		glPushMatrix();
+		glTranslatef(pos.x, pos.y, pos.z);
+		glutSolidSphere(0.1f, 20, 10);
+		glPopMatrix();
+	}
+}
+
+void MassAggregateApp::Update()
+{
+	m_world.StartFrame();
+
+	float dt = (float)m_pTimer->GetFrameTime() * 0.001f;
+	if (dt <= 0.0f)
+		return;
+
+	m_world.RunPhysics(dt);
+
+	App::Update();
+}
+
+void MassAggregateApp::Initialize()
+{
+	App::Initialize();
+}

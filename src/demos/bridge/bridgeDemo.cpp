@@ -2,23 +2,164 @@
 #include "App.h"
 #include <gl\glut.h>
 
-class BridgeDemo : public App
+#define ROD_COUNT 6
+#define CABLE_COUNT 10
+#define SUPPORT_COUNT 12
+
+#define BASE_MASS 1
+#define EXTRA_MASS 10
+
+class BridgeDemo : public MassAggregateApp
 {
+	bPhysics::BpParticleCableConstraint* supports;
+	bPhysics::BpParticleCable* cables;
+	bPhysics::BpParticleRod* rods;
+
+	bPhysics::BpVec3 massPos;
+	bPhysics::BpVec3 massDisplayPos;
+
+	void UpdateAdditionalMass();
+
 public:
 	BridgeDemo();
+	virtual ~BridgeDemo();
 
 	virtual const char* GetTitle();
 
 	virtual void Update();
 	virtual void Render();
 
-	virtual void SetCamera();
+	virtual void KeyEvent(int key, int scanCode, int action, int mods);
 };
 
 BridgeDemo::BridgeDemo()
+	: MassAggregateApp(12), cables(nullptr), supports(nullptr), rods(nullptr)
 {
+	for (unsigned i = 0; i < 12; i++)
+	{
+		unsigned x = (i % 12) / 2;
+		m_particles[i].SetPosition(bPhysics::f32(i / 2)*2.0f - 5.0f, 4, bPhysics::f32(i % 2)*2.0f - 1.0f);
+		m_particles[i].SetVelocity(0, 0, 0);
+		m_particles[i].SetDamping(0.9f);
+		m_particles[i].SetAcceleration(bPhysics::BpVec3(0, -9.81, 0));
+	}
+
+	cables = new bPhysics::BpParticleCable[CABLE_COUNT];
+	for (unsigned i = 0; i < CABLE_COUNT; i++)
+	{
+		cables[i].particle[0] = &m_particles[i];
+		cables[i].particle[1] = &m_particles[i+2];
+		cables[i].maxLength = 1.9f;
+		cables[i].restitution = 0.3f;
+		m_world.GetContactGenerators().push_back(&cables[i]);
+	}
+
+	supports = new bPhysics::BpParticleCableConstraint[SUPPORT_COUNT];
+	for (unsigned i = 0; i < SUPPORT_COUNT; i++)
+	{
+		supports[i].particle = m_particles + i;
+		supports[i].anchor = bPhysics::BpVec3(bPhysics::f32(i / 2) * 2.2f - 5.5f, 6, bPhysics::f32(i % 2)*1.6f - 0.8f);
+		if (i < 6)
+		{
+			supports[i].maxLength = bPhysics::f32(i / 2)*0.5f + 3.0f;
+		}
+		else
+		{
+			supports[i].maxLength = 5.5f - bPhysics::f32(i / 2) * 0.5f;
+		}
+
+		supports[i].restitution = 0.5f;
+		m_world.GetContactGenerators().push_back(&supports[i]);
+	}
+
+	rods = new bPhysics::BpParticleRod[ROD_COUNT];
+	for (unsigned i = 0; i < ROD_COUNT; i++)
+	{
+		rods[i].particle[0] = &m_particles[i * 2];
+		rods[i].particle[1] = &m_particles[i * 2 + 1];;
+		rods[i].length = 2;
+		m_world.GetContactGenerators().push_back(&rods[i]);
+	}
+
+	UpdateAdditionalMass();
 }
 
+BridgeDemo::~BridgeDemo()
+{
+	if (cables)
+	{
+		delete[] cables;
+	}
+
+	if (rods)
+	{
+		delete[] rods;
+	}
+
+	if (supports)
+	{
+		delete[] supports;
+	}
+}
+
+void BridgeDemo::UpdateAdditionalMass()
+{
+	for (unsigned i = 0; i < 12; i++)
+	{
+		m_particles[i].SetMass(BASE_MASS);
+	}
+
+	int x = int(massPos.x);
+
+	bPhysics::f32 xp = fmod(massPos.x, bPhysics::f32(1.0f));
+	if (x < 0)
+	{
+		x = 0;
+		xp = 0;
+	}
+	if (x >= 5)
+	{
+		x = 5;
+		xp = 0;
+	}
+
+	int z = int(massPos.z);
+	bPhysics::f32 zp = fmod(massPos.z, bPhysics::f32(1.0f));
+	if (z < 0)
+	{
+		z = 0;
+		zp = 0;
+	}
+	if (z >= 1)
+	{
+		z = 1;
+		zp = 0;
+	}
+
+	massDisplayPos.Zero();
+
+	m_particles[x * 2 + z].SetMass(BASE_MASS + EXTRA_MASS*(1 - xp)*(1 - zp));
+	massDisplayPos += m_particles[x * 2 + z].GetPosition() * (xp*(1 - zp));
+
+	if (xp > 0)
+	{
+		m_particles[x * 2 + z + 2].SetMass(BASE_MASS + EXTRA_MASS*xp*(1 - zp));
+		massDisplayPos += m_particles[x * 2 + z + 2].GetPosition() * (xp*(1 - zp));
+
+		if (zp > 0)
+		{
+			m_particles[x * 2 + z + 3].SetMass(BASE_MASS + EXTRA_MASS*xp*zp);
+			massDisplayPos += m_particles[x * 2 + z + 3].GetPosition() * (xp*zp);
+		}
+	}
+
+	if (zp > 0)
+	{
+		m_particles[x * 2 + z + 1].SetMass(BASE_MASS + EXTRA_MASS*(1 - xp)*zp);
+		massDisplayPos += m_particles[x * 2 + z + 1].GetPosition() * ((1 - xp)*zp);
+	}
+}
+	
 const char* BridgeDemo::GetTitle()
 {
 	return "Bombast Physics Bridge Demo";
@@ -26,27 +167,55 @@ const char* BridgeDemo::GetTitle()
 
 void BridgeDemo::Update()
 {
-	App::Update();
+	MassAggregateApp::Update();
 
-	float duration = (float)m_pTimer->GetFrameTime() * 0.001f;
-	if (duration <= 0.0f) return;
-
+	UpdateAdditionalMass();
 }
 
 void BridgeDemo::Render()
 {
-	//Clear viewport & set camera direction
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
-	gluLookAt(0, 1.85f, 8, 0, 0.5f, 0, 0, 1, 0);
+	MassAggregateApp::Render();
 
+	glBegin(GL_LINES);
+	glColor3f(0, 0, 1);
+	for (unsigned i = 0; i < ROD_COUNT; i++)
+	{
+		bPhysics::BpParticle** particles = rods[i].particle;
+		const bPhysics::BpVec3& p0 = particles[0]->GetPosition();
+		const bPhysics::BpVec3& p1 = particles[1]->GetPosition();
+		glVertex3f(p0.x, p0.y, p0.z);
+		glVertex3f(p1.x, p1.y, p1.z);
+	}
+
+	glColor3f(0, 1, 0);
+	for (unsigned i = 0; i < CABLE_COUNT; i++)
+	{
+		bPhysics::BpParticle** particles = cables[i].particle;
+		const bPhysics::BpVec3& p0 = particles[0]->GetPosition();
+		const bPhysics::BpVec3& p1 = particles[1]->GetPosition();
+		glVertex3f(p0.x, p0.y, p0.z);
+		glVertex3f(p1.x, p1.y, p1.z);
+	}
+
+	glColor3f(0.7f, 0.7f, 0.7f);
+	for (unsigned i = 0; i < SUPPORT_COUNT; i++)
+	{
+		const bPhysics::BpVec3& p0 = supports[i].particle->GetPosition();
+		const bPhysics::BpVec3& p1 = supports[i].anchor;
+		glVertex3f(p0.x, p0.y, p0.z);
+		glVertex3f(p1.x, p1.y, p1.z);
+	}
+	glEnd();
+
+	glColor3f(1, 0, 0);
+	glPushMatrix();
+	glTranslatef(massDisplayPos.x, massDisplayPos.y, massDisplayPos.z);
+	glutSolidSphere(0.25f, 20, 10);
+	glPopMatrix();
 }
 
-void BridgeDemo::SetCamera()
+void BridgeDemo::KeyEvent(int key, int scanCode, int action, int mods)
 {
-	App::SetCamera();
-
-	glClearColor(0.35f, 0.35f, 0.35f, 1);
 }
 
 App* GetApp()
