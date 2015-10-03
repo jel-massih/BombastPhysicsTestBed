@@ -159,6 +159,7 @@ void MassAggregateApp::Render()
 
 void MassAggregateApp::Update()
 {
+	App::Update();
 	m_world.StartFrame();
 
 	float dt = (float)m_pTimer->GetFrameTime() * 0.001f;
@@ -166,8 +167,6 @@ void MassAggregateApp::Update()
 		return;
 
 	m_world.RunPhysics(dt);
-
-	App::Update();
 }
 
 void MassAggregateApp::Initialize()
