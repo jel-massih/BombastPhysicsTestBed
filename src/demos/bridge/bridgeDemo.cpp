@@ -45,7 +45,7 @@ BridgeDemo::BridgeDemo()
 		m_particles[i].SetDamping(0.9f);
 		m_particles[i].SetAcceleration(bPhysics::BpVec3(0, -9.81, 0));
 	}
-
+	
 	cables = new bPhysics::BpParticleCable[CABLE_COUNT];
 	for (unsigned i = 0; i < CABLE_COUNT; i++)
 	{
@@ -82,7 +82,7 @@ BridgeDemo::BridgeDemo()
 		rods[i].length = 2;
 		m_world.GetContactGenerators().push_back(&rods[i]);
 	}
-
+	
 	UpdateAdditionalMass();
 }
 
@@ -141,7 +141,7 @@ void BridgeDemo::UpdateAdditionalMass()
 	massDisplayPos.Zero();
 
 	m_particles[x * 2 + z].SetMass(BASE_MASS + EXTRA_MASS*(1 - xp)*(1 - zp));
-	massDisplayPos += m_particles[x * 2 + z].GetPosition() * (xp*(1 - zp));
+	massDisplayPos += m_particles[x * 2 + z].GetPosition() * ((1 - xp)*(1 - zp));
 
 	if (xp > 0)
 	{
