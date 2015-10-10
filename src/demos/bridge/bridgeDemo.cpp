@@ -218,6 +218,28 @@ void BridgeDemo::Render()
 
 void BridgeDemo::KeyEvent(int key, int scanCode, int action, int mods)
 {
+	switch (key)
+	{
+	case GLFW_KEY_S:
+		massPos.z += 0.1f;
+		if (massPos.z > 1.0f) { massPos.z = 1.0f; }
+		break;
+	case GLFW_KEY_W:
+		massPos.z -= 0.1f;
+		if (massPos.z < 0.0f) { massPos.z = 0.0f; }
+		break;
+	case GLFW_KEY_A:
+		massPos.x -= 0.1f;
+		if (massPos.x < 0) { massPos.x = 0.0f; }
+		break;
+	case GLFW_KEY_D:
+		massPos.x += 0.1f;
+		if (massPos.x > 5.0f) { massPos.x = 5.0f; }
+		break;
+
+	default:
+		MassAggregateApp::KeyEvent(key, scanCode, action, mods);
+	}
 }
 
 App* GetApp()
