@@ -13,6 +13,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollisionDemo", "CollisionDemo\CollisionDemo.vcxproj", "{1BB98953-F47F-435E-B040-AFEC779DC354}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BridgeDemo", "BridgeDemo\BridgeDemo.vcxproj", "{E4D05786-FA1D-4CB6-B53F-B9E8CDAC29CA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{043C01B8-4137-4A60-B112-07C8D596A5E1} = {043C01B8-4137-4A60-B112-07C8D596A5E1}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
