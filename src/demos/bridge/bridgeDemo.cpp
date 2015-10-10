@@ -6,6 +6,8 @@
 #define CABLE_COUNT 10
 #define SUPPORT_COUNT 12
 
+#define VERTEX_COUNT 12
+
 #define BASE_MASS 1
 #define EXTRA_MASS 10
 
@@ -33,11 +35,11 @@ public:
 };
 
 BridgeDemo::BridgeDemo()
-	: MassAggregateApp(12), cables(nullptr), supports(nullptr), rods(nullptr)
+	: MassAggregateApp(VERTEX_COUNT), cables(nullptr), supports(nullptr), rods(nullptr)
 {
-	for (unsigned i = 0; i < 12; i++)
+	for (unsigned i = 0; i < VERTEX_COUNT; i++)
 	{
-		unsigned x = (i % 12) / 2;
+		unsigned x = (i % VERTEX_COUNT) / 2;
 		m_particles[i].SetPosition(bPhysics::f32(i / 2)*2.0f - 5.0f, 4, bPhysics::f32(i % 2)*2.0f - 1.0f);
 		m_particles[i].SetVelocity(0, 0, 0);
 		m_particles[i].SetDamping(0.9f);
@@ -59,7 +61,7 @@ BridgeDemo::BridgeDemo()
 	{
 		supports[i].particle = m_particles + i;
 		supports[i].anchor = bPhysics::BpVec3(bPhysics::f32(i / 2) * 2.2f - 5.5f, 6, bPhysics::f32(i % 2)*1.6f - 0.8f);
-		if (i < 6)
+		if (i < SUPPORT_COUNT / 2)
 		{
 			supports[i].maxLength = bPhysics::f32(i / 2)*0.5f + 3.0f;
 		}
@@ -104,7 +106,7 @@ BridgeDemo::~BridgeDemo()
 
 void BridgeDemo::UpdateAdditionalMass()
 {
-	for (unsigned i = 0; i < 12; i++)
+	for (unsigned i = 0; i < VERTEX_COUNT; i++)
 	{
 		m_particles[i].SetMass(BASE_MASS);
 	}
